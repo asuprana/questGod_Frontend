@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.nav-group {
+  position: relative;
+  top: 0;
+  margin: 0 3vw;
+}
+
+
+.nav-group ul:last-child{ position: absolute; right: 0; top: 0;}
+
+
+.user-auth {
+  width: 50%;
+  height: auto;
+  margin: auto;
+}
+
+.product-content li {
+  width: 20%;
+  list-style-type: none;
+  padding: 1vw;
+  display: inline-block;
+  bottom: 0;
+  right: 0;
+  transition: all .5 ease;
+}
+
+.product-content li .card {
+  position: relative;
+  bottom: 0; right: 0;
+  transition: all .3s ease;
+}
+
+.product-content li:hover .card {
+  bottom: .3em;
+  right: .3em;
+  transition: all .5s ease;
+}
+
+.product-content li:hover .card {
+  box-shadow: 2px 2px 12px 0 #ADADAD;
+  transition: .5s;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
