@@ -65,8 +65,10 @@ class Register extends Component {
             const clientId = 'zwsskesvu3e57dynyn7wigb43fqfhp';
             const redirectUri = 'localhost:3000';
 
-            fetch('https://id.twitch.tv/oauth2/authorize?client_id=' + clientId + '&redirect_uri=http://localhost:3000/register&response_type=code&scope', {
-                method: 'get'
+            fetch('https://id.twitch.tv/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri + '&response_type=code&scope', {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
             })
                 .then(results => {
                     return results;

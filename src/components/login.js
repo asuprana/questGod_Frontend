@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {PostData} from '../services/PostData';
-import axios from 'axios';
 import '../App.css';
 import {Redirect} from 'react-router-dom';
 
@@ -17,13 +16,6 @@ class Login extends Component {
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-
-    // componentDidMount() {
-        
-    // }
-    // login() {
-    //     console.log('login');
-    // }
 
     onChangeForm(e) {
         this.setState({[e.target.name]: e.target.value});
@@ -43,17 +35,10 @@ class Login extends Component {
 
         onSubmit(e) {
             e.preventDefault();
-            const obj = {
-                email: this.state.email,
-                password: this.state.password,
-            };
-            
 
             PostData('auth/authentication', this.state)
                 .then((result) => {
                     const responseJSON = result;
-                    // console.log(responseJSON.data.token);
-                    // console.log(responseJSON.status);
 
                     if (responseJSON.status === 200) {
                         const userData = {
@@ -66,30 +51,7 @@ class Login extends Component {
                     } else {
                         console.log('login error');
                     }
-                });
-
-
-            // axios.post('http://localhost:8080/restapi_0/auth/authentication', obj)
-            //     .then( (response) => {
-            //         console.log(response.data.success);
-
-            //         if (response.data.success) {
-            //             console.log('redirect');
-            //         } else if (response.data.error) {
-            //             console.log('error');
-            //         } else {
-            //             return;
-            //         }
-
-                    
-            //     })
-
-            // this.setState({
-            //     email: '',
-            //     password: ''
-            // });
-
-            
+                });          
 
         }
 

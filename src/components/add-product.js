@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 
 class AddNewProduct extends Component{
     constructor(props) {
@@ -28,10 +27,7 @@ class AddNewProduct extends Component{
 
     onSubmit(e) {
         e.preventDefault();
-        const body = {
-            name: 'test',
-            productType: 'test'
-        }
+        
         const obj = {
             method: 'POST',
             headers: {
