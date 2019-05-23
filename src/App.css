@@ -59,11 +59,8 @@
   bottom: .3em;
   right: .3em;
   transition: all .5s ease;
-}
-
-.product-content li:hover .card {
+  cursor: pointer;
   box-shadow: 2px 2px 12px 0 #ADADAD;
-  transition: .5s;
 }
 
 @keyframes App-logo-spin {

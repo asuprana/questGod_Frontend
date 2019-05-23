@@ -68,7 +68,7 @@ class Register extends Component {
             fetch('https://id.twitch.tv/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri + '&response_type=code&scope', {
                 method: 'GET',
                 credentials: 'same-origin',
-                headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+                headers: {'Content-Type': 'application/json'},
             })
                 .then(results => {
                     return results;
@@ -126,7 +126,7 @@ class Register extends Component {
 
                         <div className="input-group">
                             <div className="input-group-button">
-                                <a className="btn btn-primary">Login</a>
+                                <a href="" className="btn btn-primary">Login</a>
                                 <input type="submit" value="Register" className="btn btn-success"/>
                             </div>
                         </div>

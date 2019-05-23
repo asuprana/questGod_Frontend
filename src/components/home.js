@@ -8,23 +8,40 @@ class Home extends Component {
         super(props);
         this.state = {
             redirect: false,
-            show: false,
-            product: []
+            showUpdateModal: false,
+            product: [],
+            userData: null
         }
     }
 
-    showAddProduct = () => {
-        this.setState({ show: true });
-    };
+    // showAddProduct = () => {
+    //     this.setState({ showUpdateModal: true });
+    // };
 
-    hideAddProduct = () => {
-        this.setState({ show: false });
-    };
+    // hideAddProduct = () => {
+    //     this.setState({ showUpdateModal: false });
+    // };
+
+    onClickUpdate = () => {
+        this.setState({ showUpdateModal: true });
+        if (this.state.showUpdateModal) {
+            const updateModal = (
+                <div className="modal-wrapper">
+                    <div className="modal-content">
+                        <h3>Update Product</h3>
+
+                    </div>
+                </div>
+            )
+        }
+        
+    }
 
     componentDidMount() {
         if (sessionStorage.getItem('userData')) {
-            const userData = sessionStorage.getItem('userData');
-            console.log(userData);
+            // const userData = JSON.parse(sessionStorage.getItem('userData'));
+            // this.setState({ userData: userData });
+            // console.log(this.state.userData);
             const obj = {
                 method: 'get',
                 headers: new Headers({'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE'
@@ -41,7 +58,7 @@ class Home extends Component {
                             <li key={product._id}>
                                 <div className="card">
                                     <div className="buttons p-2">
-                                        <button className="btn btn-warning mx-1">Update</button>
+                                        <button className="btn btn-warning mx-1" onClick={this.onClickUpdate}>Update</button>
                                         <button className="btn btn-danger mx-1">Delete</button>
                                     </div>
 
@@ -60,9 +77,7 @@ class Home extends Component {
 
         } else {
             this.setState({redirect: false});
-        }
-
-        
+        }  
         
     }
 
@@ -71,6 +86,7 @@ class Home extends Component {
         if ( this.state.redirect ) {
             return (<Redirect to={'/login'}/>)
         }
+
         return (
             <div className="mt-4 container-fluid">
                 <h3>Welcome to Quest God</h3>
