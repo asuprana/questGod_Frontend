@@ -21,39 +21,39 @@ class Login extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-        onChangeEmail(e) {
-            this.setState({
-                email: e.target.value
-            });
-        }
+    onChangeEmail(e) {
+        this.setState({
+            email: e.target.value
+        });
+    }
 
-        onChangePassword(e) {
-            this.setState({
-                password: e.target.value
-            });
-        }
+    onChangePassword(e) {
+        this.setState({
+            password: e.target.value
+        });
+    }
 
-        onSubmit(e) {
-            e.preventDefault();
+    onSubmit(e) {
+        e.preventDefault();
 
-            PostData('auth/authentication', this.state)
-                .then((result) => {
-                    const responseJSON = result;
+        PostData('auth/authentication', this.state)
+            .then((result) => {
+                const responseJSON = result;
 
-                    if (responseJSON.status === 200) {
-                        const userData = {
-                            email: this.state.email,
-                            password: this.state.password,
-                            token: responseJSON.data.token
-                        }
-                        sessionStorage.setItem('userData', JSON.stringify(userData));
-                        this.setState({redirect: true});
-                    } else {
-                        console.log('login error');
+                if (responseJSON.status === 200) {
+                    const userData = {
+                        email: this.state.email,
+                        password: this.state.password,
+                        token: responseJSON.data.token
                     }
-                });          
+                    sessionStorage.setItem('userData', JSON.stringify(userData));
+                    this.setState({redirect: true});
+                } else {
+                    console.log('login error');
+                }
+            });          
 
-        }
+    }
 
         render() {
             if ( this.state.redirect || sessionStorage.getItem('userData') ) {

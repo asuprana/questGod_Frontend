@@ -63,6 +63,38 @@
   box-shadow: 2px 2px 12px 0 #ADADAD;
 }
 
+.modal-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,.6);
+  position: fixed;
+  left: 0; top: 0;
+}
+
+.modal-content {
+  position: relative;
+  width: 50%;
+  min-height: 20vw;
+  transform: translate(-50%, -50%);
+  left: 50%; top: 50%;
+}
+
+.modal-content h3 {
+  padding: .5vw 1.5vw;
+}
+
+.modal-close {
+  position: absolute;
+  right: 0; top: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  background: red;
+  color: #FFF;
+  border: none;
+  outline: none;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
