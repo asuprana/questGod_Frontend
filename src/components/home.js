@@ -8,19 +8,23 @@ class Home extends Component {
         super(props);
         this.state = {
             redirect: false,
-            showUpdateModal: false,
             product: [],
             userData: null,
             selectedProduct: null,
             name: '',
             productType: '',
+            showUpdateModal: false,
+            showDeleteModal: false,
             redirectOnSubmit: false,
+            redirectOnDelete: false,
         }
 
         this.onClickUpdate = this.onClickUpdate.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeProductType = this.onChangeProductType.bind(this);
         this.onSubmitUpdate = this.onSubmitUpdate.bind(this);
+        this.onClickDelete = this.onClickDelete.bind(this);
+        this.onConfirmDelete = this.onConfirmDelete.bind(this);
     }
     
     onChangeName(e) {
@@ -133,7 +137,79 @@ class Home extends Component {
     }
 
     onClickModalClose = () => {
-        this.setState({ showUpdateModal: false });
+        this.setState({ 
+            showUpdateModal: false,
+            showDeleteModal: false
+        });
+    }
+
+    onClickDelete(e){
+        this.state = {
+            selectedProduct: e.target.id,
+            showDeleteModal: true
+        }
+
+        this.setState({showDeleteModal: true});
+        this.setState({selectedProduct: e.target.id});
+
+        if (this.state.showDeleteModal) {
+            const obj = {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE'
+                },
+            }
+
+            fetch('http://localhost:8080/restapi_0/products/id/' + this.state.selectedProduct, obj)
+            .then( response => {
+                return response.json();
+            })
+            .then( data => {
+                console.log(data.result);
+                const productDelete = data.result.map((product) => {
+                    return(
+                        <div key={product._id} className="btn-group" role="group">
+                            <p className="d-block w-100">Are you sure want to delete {product.name}?</p>
+                            <div className="d-block w-100">
+                                <button className="btn btn-danger" onClick={this.onConfirmDelete}>Yes</button>
+                                <button className="btn btn-light" onClick={this.onClickModalClose}>Cancel</button>
+                            </div>
+                        </div>
+                    )
+                })
+                this.setState({productDelete: productDelete});
+            })
+        }
+    }
+
+    onConfirmDelete(e) {
+        e.preventDefault();
+
+        const obj = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE'
+            },
+
+            body: JSON.stringify({
+                productId: this.state.productId
+            }),
+        };
+
+        console.log(obj);
+
+        fetch('http://localhost:8080/restapi_0/products', obj)
+        .then(response => {
+            return response.json()
+        })
+        .then( data => {
+            console.log(data);
+        })
+        .catch( err => {
+            console.log(err);
+        })
     }
 
 
@@ -159,7 +235,7 @@ class Home extends Component {
                                 <div className="card">
                                     <div className="buttons p-2">
                                         <button className="btn btn-warning mx-1" onClick={this.onClickUpdate} id={product._id}>Update</button>
-                                        <button className="btn btn-danger mx-1" >Delete</button>
+                                        <button className="btn btn-danger mx-1" onClick={this.onClickDelete} id={product._id}>Delete</button>
                                     </div>
 
                                     <div className="card-body">
@@ -203,6 +279,16 @@ class Home extends Component {
                             <h3>Update Product</h3>
                             <button className="modal-close" onClick={this.onClickModalClose.bind(this)}>X</button>
                             {this.state.productUpdate}
+                        </div>
+                    </div> : <div></div>
+                    }
+
+                    {this.state.showDeleteModal?
+                    <div className="modal-wrapper">
+                        <div className="modal-content px-5 py-3">
+                            <h3>Delete Product</h3>
+                            <button className="modal-close" onClick={this.onClickModalClose.bind(this)}>X</button>
+                            {this.state.productDelete}
                         </div>
                     </div> : <div></div>
                     }
