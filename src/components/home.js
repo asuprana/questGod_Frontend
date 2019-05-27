@@ -44,7 +44,7 @@ class Home extends Component {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE'
+                'Authorization': 'Bearer ' + this.state.userToken
             },
             body: JSON.stringify({
                 productId: this.state.selectedProduct,
@@ -52,7 +52,6 @@ class Home extends Component {
                 productType: this.state.productType,
             }),
         };
-        console.log(obj);
 
         fetch('http://localhost:8080/restapi_0/products', obj)
         .then( response => {
@@ -82,8 +81,7 @@ class Home extends Component {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE',
-                    'mode': 'no-cors'
+                    'Authorization': 'Bearer ' + this.state.userToken,
                 },        
             }
     
@@ -159,7 +157,7 @@ class Home extends Component {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE'
+                    'Authorization': 'Bearer ' + this.state.userToken
                 },
             }
 
@@ -193,7 +191,7 @@ class Home extends Component {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE'
+                'Authorization': 'Bearer ' + this.state.userToken
             },
 
             body: JSON.stringify({
@@ -221,14 +219,17 @@ class Home extends Component {
             let userData = JSON.parse(sessionStorage.getItem('userData'));
             this.setState({
                 userEmail: userData.email,
-                userToken: userData.userToken
+                userToken: userData.token
             })
+            
             const obj = {
                 method: 'get',
                 headers: {
-                    'Authorization': 'Bearer ' + this.state.userToken
+                    'Authorization': 'Bearer ' + userData.token
                 }
              }
+            
+            console.log('session token:' + userData.token);
             
             fetch('http://localhost:8080/restapi_0/products', obj)
                 .then(results => {
@@ -264,6 +265,7 @@ class Home extends Component {
     }
 
     render() {
+        console.log(this.state.userToken);
         
         if ( this.state.redirect ) {
             return (<Redirect to={'/login'}/>)
