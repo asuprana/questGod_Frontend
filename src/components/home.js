@@ -17,6 +17,8 @@ class Home extends Component {
             showDeleteModal: false,
             redirectOnSubmit: false,
             redirectOnDelete: false,
+            userEmail: '',
+            userToken: '',
         }
 
         this.onClickUpdate = this.onClickUpdate.bind(this);
@@ -182,6 +184,7 @@ class Home extends Component {
             })
         }
     }
+    
 
     onConfirmDelete(e) {
         e.preventDefault();
@@ -194,7 +197,7 @@ class Home extends Component {
             },
 
             body: JSON.stringify({
-                productId: this.state.productId
+                productId: this.state.selectedProduct
             }),
         };
 
@@ -212,16 +215,19 @@ class Home extends Component {
         })
     }
 
-
+    
     componentDidMount() {
         if (sessionStorage.getItem('userData')) {
-            // const userData = JSON.parse(sessionStorage.getItem('userData'));
-            // this.setState({ userData: userData });
-            // console.log(this.state.userData);
+            let userData = JSON.parse(sessionStorage.getItem('userData'));
+            this.setState({
+                userEmail: userData.email,
+                userToken: userData.userToken
+            })
             const obj = {
                 method: 'get',
-                headers: new Headers({'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE'
-                })
+                headers: {
+                    'Authorization': 'Bearer ' + this.state.userToken
+                }
              }
             
             fetch('http://localhost:8080/restapi_0/products', obj)
@@ -263,12 +269,12 @@ class Home extends Component {
             return (<Redirect to={'/login'}/>)
         }
 
-        if ( this.state.redirectOnSubmit ) {
-            return (<Redirect to={'/home'}/>);
-        }
+        // if ( this.state.redirectOnSubmit ) {
+        //     return (<Redirect to={'/home'}/>);
+        // }
         return (
             <div className="mt-4 container-fluid">
-                <h3>Welcome to Quest God</h3>
+                <h3>Welcome to Quest God, {this.state.userEmail}</h3>
                 <a href="http://localhost:3000/product/add" className="btn btn-success my-4">Create New Product</a>
 
                 <div className="product-content mx-4">
