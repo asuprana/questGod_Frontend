@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+import { BrowserRouter as Link } from 'react-router-dom';
 
 class Register extends Component {
 
@@ -64,21 +65,74 @@ class Register extends Component {
             const clientId = 'zwsskesvu3e57dynyn7wigb43fqfhp';
             const redirectUri = 'http://localhost:3000/home';
             const clientSecret = '5156gbhsxvu90uswmv45u0znu2fxzv';
+            const state = '9r7bi32byf2a1z3i51nm927plnaqf1';
+            const twitchUri = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token`;
 
-            fetch('https://id.twitch.tv/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri + '&response_type=code', {
-                method: 'GET',
-                headers: new Headers ({
-                    'Content-Type': 'application/json','Access-Control-Allow-Origin': '*',
-                    'mode': 'no-cors',
-                    'Access-Control-Allow-Credentials': 'true'
-                }),
+            // fetch('https://id.twitch.tv/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri + '&response_type=code', {
+            //     method: 'GET',
+            //     headers: new Headers ({
+            //         'Access-Control-Allow-Credentials': 'true'
+            //     }),
+            // })
+            //     .then(results => {
+            //         console.log(results);
+            //     })
+            //     .then(data => {
+            //         console.log(data);
+            //     })
+
+            const config = {
+                headers: {
+                    // 'Content-Type' : 'text/html'
+                    'Access-Control-Allow-Credentials' : true,
+                    'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept',
+                    'Access-Control-Allow-Methods' : 'GET, PUT, POST, DELETE',
+                    'mode' : 'no-cors',
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true,
+            }
+
+            return new Promise((resolve, reject) => {
+                fetch(twitchUri, {
+                    method: 'POST',
+                    headers: config
+                })
+                    .then((response) => {
+                        resolve(response);
+                        console.log(response);
+                    })
+
+                    .catch((err) => {
+                        reject(err)
+                        console.log(err);
+                    })
             })
-                .then(results => {
-                    return results;
-                })
-                .then(data => {
-                    console.log(data);
-                })
+
+            // const config = {
+            //     headers: {
+            //         // 'Content-Type' : 'text/html'
+            //         'Access-Control-Allow-Credentials' : true,
+            //         'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept',
+            //         'Access-Control-Allow-Methods' : 'GET, PUT, POST, DELETE',
+            //         'mode' : 'no-cors',
+            //         'Content-Type': 'application/json'
+                    
+            //     },
+            //     withCredentials: true,
+            // }
+
+            // console.log(`base url: ${twitchUri}`);
+            // console.log(`config: ${config}`);
+
+            // axios.get(twitchUri, config)
+            //     .then(response => {
+            //         console.log(response);
+            //     })
+            //     .catch(err => {
+            //         console.log('error');
+            //         console.log(err);
+            //     })
         }
     
 
@@ -127,7 +181,7 @@ class Register extends Component {
 
                         <div className="input-group">
                             <div className="input-group-button">
-                                <a href="" className="btn btn-primary">Login</a>
+                                {/* <Link to={'/login'} className="btn btn-primary">Login</Link> */}
                                 <input type="submit" value="Register" className="btn btn-success"/>
                             </div>
                         </div>
