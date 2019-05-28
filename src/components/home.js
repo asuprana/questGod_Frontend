@@ -225,9 +225,10 @@ class Home extends Component {
             const obj = {
                 method: 'get',
                 headers: {
-                    'Authorization': 'Bearer ' + userData.token
+                    // 'Authorization': 'Bearer ' + userData.token
+                    'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhcnRuZXJAZW1haWwuY29tIiwidXNlcklkIjoiNWNkNGZlZGViMWMyZTQxODI0OTliMmRmIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU3NDYzNzg3LCJleHAiOjE1NjYxMDM3ODd9.xQMrZj_sy0tTGRDT1m67YRDHiOBrz5ZUDWASfAm7ODk'
                 }
-             }
+            }
             
             console.log('session token:' + userData.token);
             
@@ -236,6 +237,7 @@ class Home extends Component {
                     return results.json();
                 })
                 .then(data => {
+                    console.log(data);
                     const productList = data.result.map((product) => {
                         return (
                             <li key={product._id}>
@@ -301,7 +303,6 @@ class Home extends Component {
                     </div> : <div></div>
                     }
                 </div>
-                
             </div>
         )
     }
