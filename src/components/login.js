@@ -46,6 +46,8 @@ class Login extends Component {
                         password: this.state.password,
                         token: responseJSON.data.token
                     }
+
+                    // console.log(userData);
                     sessionStorage.setItem('userData', JSON.stringify(userData));
                     this.setState({redirect: true});
                 } else {

@@ -10,7 +10,6 @@ class Register extends Component {
             this.onChangePassword = this.onChangePassword.bind(this);
             this.onChangeUserType = this.onChangeUserType.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
-            // this.onClickTest = this.onClickTest.bind(this);
         
             this.state = {
                 email: '',
@@ -63,12 +62,16 @@ class Register extends Component {
 
         signupTwitch() {
             const clientId = 'zwsskesvu3e57dynyn7wigb43fqfhp';
-            const redirectUri = 'localhost:3000';
+            const redirectUri = 'http://localhost:3000/home';
+            const clientSecret = '5156gbhsxvu90uswmv45u0znu2fxzv';
 
-            fetch('https://id.twitch.tv/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri + '&response_type=code&scope', {
+            fetch('https://id.twitch.tv/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri + '&response_type=code', {
                 method: 'GET',
-                credentials: 'same-origin',
-                headers: {'Content-Type': 'application/json'},
+                headers: new Headers ({
+                    'Content-Type': 'application/json','Access-Control-Allow-Origin': '*',
+                    'mode': 'no-cors',
+                    'Access-Control-Allow-Credentials': 'true'
+                }),
             })
                 .then(results => {
                     return results;
@@ -76,8 +79,6 @@ class Register extends Component {
                 .then(data => {
                     console.log(data);
                 })
-
-            // fetch('https://id.twitch.tv/oauth2/authorize?client_id=zwsskesvu3e57dynyn7wigb43fqfhp&redirect_uri=localhost:3000/register&response_type=code&scope');
         }
     
 
