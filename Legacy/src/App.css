@@ -95,6 +95,50 @@
   outline: none;
 }
 
+/* Slider:
+- require move to other css file (homepage css file) */
+
+#content-slider {
+  padding: 2vw 1vw;
+  display: flex;
+  /* white-space: nowrap; */
+  overflow-x: auto;
+}
+
+#content-slider .slider-item {
+  width: 25%;
+  height: 250px;
+  position: relative;
+  display: inline-block;
+  transition: all 1s;
+  float: left;
+}
+
+#content-slider .slider-item img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#content-slider .slider-item:hover {
+  width: 35%;
+  height: 300px;
+  transition: all 1s;
+  opacity: .9;
+  cursor: pointer;
+}
+
+#content-slider .slider-item:hover .content {
+  /* position: absolute; */
+}
+
+/*test */
+/* #content-slider .slider-item:nth-child(1) {
+  width: 35%;
+  height: 350px;
+} */
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -103,3 +147,4 @@
     transform: rotate(360deg);
   }
 }
+
