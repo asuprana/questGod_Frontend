@@ -23,23 +23,8 @@ class App extends Component {
   componentDidMount() {
     if (sessionStorage.getItem('userData')) {
       this.setState({login:true});
-
-        const config = {
-          'method' : 'GET',
-          // 'Authorization': 'Bearer ' + userData.token
-          'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhcnRuZXJAZW1haWwuY29tIiwidXNlcklkIjoiNWNkNGZlZGViMWMyZTQxODI0OTliMmRmIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU3NDYzNzg3LCJleHAiOjE1NjYxMDM3ODd9.xQMrZj_sy0tTGRDT1m67YRDHiOBrz5ZUDWASfAm7ODk'
-        }
-
-        // fetch("http://localhost:8080/restapi_0/products", config)
-        //   .then( results => {
-        //     return results.json();
-        //   })
-        //   .then( data => {
-        //     console.log(data);
-        //   })
-          
-      }
     }
+  }
 
   
   logout() {
@@ -99,8 +84,6 @@ class App extends Component {
 
             
           </nav>
-          
-          
 
           <div className="container-fluid">
             <Switch>
@@ -109,41 +92,6 @@ class App extends Component {
               <Route path="/home" component={ Home } />
               <Route path="/product/add" component={ AddNewProduct } />
             </Switch>
-
-            <div id="content-slider" class="content-slider">
-              <div className="slider-item">
-                <div className="content">
-                  <img src="https://i.ytimg.com/vi/Kt4fhvkslQU/maxresdefault.jpg"/>
-
-                </div>
-              </div>
-
-              <div className="slider-item">
-                <div className="content">
-                  <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/10/02/03563189964cf72.jpg"/>
-
-                </div>
-              </div>
-
-              <div className="slider-item">
-                <div className="content">
-
-                  <img src="https://www.celjaded.com/wp-content/uploads/2016/08/CelJaded-Gears-of-War-The-Board-Game-Retrospective-Banner.jpg"/>
-                </div>
-                
-              </div>
-
-              <div className="slider-item">
-                <div className="content">
-                  <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/03/70/09561f676c878ce.jpg"/>
-
-                </div>
-              </div>
-
-              {/* <div className="slider-item">
-                <img src="https://s3.amazonaws.com/htw/dt-contest-entries/08081e9c84813c8b1a4c23b161016734.png"/>
-              </div> */}
-            </div>
           </div>
         </div>
       </Router>

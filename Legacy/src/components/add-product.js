@@ -44,8 +44,7 @@ class AddNewProduct extends Component{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer ' + this.state.userToken
-                'Authorization':  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jIiwidXNlcklkIjoiNWNkYmNmM2U4Y2EwMzkyZWY4ZjVmYjJiIiwidXNlclR5cGUiOiJQYXJ0bmVyIiwiaWF0IjoxNTU4MDc1MTg1LCJleHAiOjE1NjY3MTUxODV9.X2myo5q8Ioqa8swqZGFQURre6XFFcmGF_gq4KGrAAjE'
+                'Authorization': 'Bearer ' + this.state.userToken
             },
             body: JSON.stringify({
                 name: this.state.name,

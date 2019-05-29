@@ -9,8 +9,7 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            redirect: false,
-            loginSuccess: false,
+            redirect: false
         }
 
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -50,10 +49,7 @@ class Login extends Component {
 
                     // console.log(userData);
                     sessionStorage.setItem('userData', JSON.stringify(userData));
-                    this.setState({
-                        redirect: true,
-                        loginSuccess: true,
-                    });
+                    this.setState({redirect: true});
                 } else {
                     console.log('login error');
                 }
@@ -65,12 +61,6 @@ class Login extends Component {
             if ( this.state.redirect || sessionStorage.getItem('userData') ) {
                 return (<Redirect to={'/home'}/>)
             }
-
-            const loginSuccess = (
-                <div className="alert alert-success">
-                    <strong>Login success!</strong>
-                </div>
-            )
 
             // if ( sessionStorage.getItem('userData') ) {
             //     return (<Redirect to={'/home'})
@@ -112,13 +102,7 @@ class Login extends Component {
                         <input type="submit" value="Login" className="btn btn-success"/>
                     </div>
                 </form>
-
-                {this.state.loginSuccess? loginSuccess : <div></div>}
-
-                
-
             </div>
-
             )
         }
 
