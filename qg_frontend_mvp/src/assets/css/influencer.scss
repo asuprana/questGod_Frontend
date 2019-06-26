@@ -1,0 +1,126 @@
+.subscriber-list-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0, .5);
+    left: 0;
+    top: 0;
+    z-index: 999;
+    .subscriber-list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-color: #FFF;
+        width: 60%;
+        transform: translate(-50%, -50%);
+        padding: 1vw 2vw;
+
+        .modal-close {
+            border:none;
+            background-color: red;
+            width: 40px;
+            height: 40px;
+            color: #FFF;
+            font-weight: 600;
+            font-size: 1.2em;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+}
+
+.profile {
+    //modals
+
+    div:nth-child(1) {
+        .subscribe-list {
+            button {
+                display: block;
+            }
+
+            // button.unsubscribe {
+            //     background-color: rgba(255, 0, 0, 0.3);
+            //     border-color: rgba(255, 0, 0, 0.3);
+            // }
+
+            p {
+                
+            }
+        }
+
+    }
+
+    div:nth-child(2) {
+        .season-1 {
+            .logo {
+                margin: auto;
+                display: block;
+            }
+        }
+
+        .batch-list {
+
+            .batch-list-content {
+                width: auto;
+                margin: 2vw auto;
+                li {
+                    transition: .3s;
+                    width: 30%;
+                    display: inline-block;
+                    position: relative;
+                    bottom: 0; right: 0;
+                    list-style-type: none;
+                    padding: 5% 2%;
+                    border: 2px solid transparent;
+
+                    .wrapper {
+                        width: 100%;
+                        img {
+                            width: 60%;
+                            height: auto;
+                        }
+
+                        p {
+                            font-size: calc(8px + 1vmin);
+                            margin-top: .4vw;
+                            margin-bottom: 0;
+                        }
+
+                        .points {
+                            font-size: calc(10px + 2vmin);
+                            font-weight: 450;
+                        }
+                    }
+                }
+
+                li:hover {
+                    transition: .3s;
+                    bottom: 2px; right: 2px;
+                    border: 2px solid rgba(175, 175, 175, .5);
+                    box-shadow: 0 0 9px 0 #ADADAD;
+                }
+            }
+        }
+    }
+}
+
+/* Mobile Device */
+@media only screen and (max-width: 576px) {
+
+}
+
+/* Tablet Device */
+@media only screen and (min-width: 577px) and (max-width: 720px) {
+
+}
+
+/* Notebook Device */
+@media only screen and (min-width: 721px) and (max-width: 960px) {
+
+}
+
+/* Desktop */
+@media only screen and (min-width: 961px) {
+    
+}
